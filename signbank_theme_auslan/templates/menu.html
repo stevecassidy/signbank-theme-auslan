@@ -113,18 +113,15 @@
     </ul>
     {% endif %}
 
-
     <form class="navbar-form navbar-right" role="search" id="frmSearch" name="frmSearch" method="get" action="/dictionary/search">
-       <div class="form-group">
-          <input class='form-control' placeholder='Enter keywords' type="Text" name="query" value="{{ query }}" maxlength="50">
-       </div>
-
-       <button type="submit" class="btn btn-default">Search Keywords</button>
+        <div class="input-group" style='width:300px'>
+            {{menusearchform.query}}
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+            {{menusearchform.category}}
+        </div>
     </form>
-
-
-
-
 
   </div><!-- /.navbar-collapse -->
 </nav>

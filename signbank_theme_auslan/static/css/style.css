@@ -68,7 +68,6 @@ body {
   
 }
 
-
 #signs { 
    margin-right: 0em;
    text-align: left;
@@ -76,26 +75,8 @@ body {
    width: 338px;  /* to match rh edge of video container */
 }
 
-
-#definitionblock {
-   border-top: 1px solid #000; 
-   margin-top: 0px;
-   background-color: #FFF;
-}
-
-
-#definitionblock .col-md-8 {
-    position: inherit;
-}
-
-@media  (min-width: 992px) {
-
-    #definitionblock .col-md-8 {
-        padding-left: 60px;
-        min-height: 380px;
-        position: relative;
-    }
-
+.definition-panel .video-thumbnail {
+    margin: 10px auto;
 }
     
 table{

@@ -78,7 +78,20 @@ body {
 .definition-panel .video-thumbnail {
     margin: 10px auto;
 }
-    
+
+.definition-entry {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.definition-counter {
+    display:  inline-block;
+    margin-left: -15px;
+}
+
 table{
 	display: block;
 }

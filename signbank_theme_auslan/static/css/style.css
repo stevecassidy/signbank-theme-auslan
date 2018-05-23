@@ -298,7 +298,11 @@ table{
     list-style:none;
 }
 
-
+.tags {
+    display: block;
+    width: 100%;
+    clear: both;
+}
 .tag {
     float:left;
     height:24px;
@@ -351,7 +355,9 @@ table{
     box-shadow:-1px -1px 2px #004977;
     }
     
-    
+.tag a {
+    color: #ffffff !important;
+}
 
 .tagdelete {
     color: red;

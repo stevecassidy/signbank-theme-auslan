@@ -13,10 +13,7 @@
     var base_url = "{% static 'images/'%}";
 </script>
 
-<!-- JS required for video display -->
-<script src="//vjs.zencdn.net/6.2.0/video.js"></script>
-<script type="text/javascript" src="{% static 'js/videojs-looper.js' %}"></script>
-<!-- end video JS -->
+{% load_video_javascript %}
 
 <script type='text/javascript' src="{% static 'js/numbersigns.js' %}"></script>
 {% endblock %}

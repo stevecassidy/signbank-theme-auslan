@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{% static 'projekktor/themes/maccaco/projekktor.style.css' %}" type="text/css" media="screen" />
 
     <link href="//vjs.zencdn.net/4.5/video-js.css" rel="stylesheet">
-    <script src="//vjs.zencdn.net/4.5/video.js"></script>
+
+    {% load_video_javascript %}
+
     <script>
     $(document).ready(function(){
         var myPlayer = videojs('sign');

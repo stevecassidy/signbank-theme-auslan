@@ -10,6 +10,9 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+    .grammar-video-item {
+        padding: 1em;
+    }
     </style>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/tagmanager.css' %}">
@@ -46,6 +49,8 @@
     {% for chapter in '456789' %}
       <li role="presentation" {% if forloop.first %}class="active"{% endif %}><a href="#chapter{{chapter}}" aria-controls="home" role="tab" data-toggle="tab">Chapter {{chapter}}</a></li>
     {% endfor %}
+      <li role="presentation"><a href="#chapter10" aria-controls="home" role="tab" data-toggle="tab">Chapter 10</a></li>
+
     </ul>
 
     <div class="tab-content">
@@ -56,13 +61,25 @@
                     {% if video.tag.0 == chapter %}
                     <div class=grammar-video-item>
                         {% thumbnail_popup id=video.id category=video.category tag=video.tag width=600 height=400 preload="none"%}
-                        <div class=caption>Figure {{video.tag}}</div>
+                        <div class=caption>Example {{video.tag}}</div>
                     </div>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
     {% endfor %}
+        <div role="tabpanel" class="tab-pane fade" id="chapter10">
+                <div class='grammar-video-list'>
+                    {% for video in videos %}
+                        {% if video.tag.0 == '1' %}
+                        <div class=grammar-video-item>
+                            {% thumbnail_popup id=video.id category=video.category tag=video.tag width=600 height=400 preload="none"%}
+                            <div class=caption>Example {{video.tag}}</div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
     </div>
 
 </div>

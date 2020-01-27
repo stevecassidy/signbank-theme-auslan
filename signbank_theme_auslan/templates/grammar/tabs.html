@@ -13,6 +13,9 @@
     .grammar-video-item {
         padding: 1em;
     }
+    .video-delete-form {
+        display: none;
+    }
     </style>
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/tagmanager.css' %}">
@@ -30,7 +33,7 @@
 {# show the edit button if the user has permission to change pages #}
 {% if perms.pages.change %}
 <div id="editbutton">
-    <a href="/admin/pages/page/{{page.id}}/">[Edit]</a>
+    <a class='btn btn-default' href="/admin/pages/page/{{page.id}}/">Edit Page</a>
 </div>
 {% endif %}
 
@@ -62,6 +65,14 @@
                     <div class=grammar-video-item>
                         {% thumbnail_popup id=video.id category=video.category tag=video.tag width=600 height=400 preload="none"%}
                         <div class=caption>Example {{video.tag}}</div>
+                        {% if perms.pages.change %}
+                        <div class='video-delete-form'>
+                            <form action="{% url 'video:delete' category=video.category tag=video.tag %}" method='post'>
+                                {% csrf_token %}
+                                <input class='btn btn-danger' id='delete_video' type='submit' value='Delete/Revert this video'>
+                            </form>
+                        </div>
+                        {% endif %}
                     </div>
                     {% endif %}
                 {% endfor %}
@@ -75,7 +86,15 @@
                         <div class=grammar-video-item>
                             {% thumbnail_popup id=video.id category=video.category tag=video.tag width=600 height=400 preload="none"%}
                             <div class=caption>Example {{video.tag}}</div>
-                        </div>
+                            {% if perms.pages.change %}
+                            <div class='video-delete-form'>
+                                <form action="{% url 'video:delete' category=video.category tag=video.tag %}" method='post'>
+                                    {% csrf_token %}
+                                    <input class='btn btn-danger' id='delete_video' type='submit' value='Delete/Revert this video'>
+                                </form>
+                            </div>
+                            {% endif %}
+                            </div>
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -83,6 +102,40 @@
     </div>
 
 </div>
+
+{% if perms.pages.change %}
+<div id="videoupload" class='panel panel-primary'>
+    <div class="panel-heading">Upload Video</div>
+    <div class='panel-body'>
+        <p>Upload a new or replacement video to appear on this page. Enter the
+        example number below. If you use an existing example number, the video will
+        be updated.  A new number will add a new video example.</p>
+        <form class="form-inline" action="{% url 'video:upload' %}" method="post" enctype="multipart/form-data" id="video_upload_form">
+          {% csrf_token %}
+          <input type='hidden' name='redirect' value='{{request.path}}?edit'>
+
+                <div class='form-group'>
+                    <input type="file" name="videofile" required="" id="id_videofile">
+                </div>
+
+                <div class='form-group'>
+                  <label for='tag'>Example number:</label>
+                  <input class="form-control"  type='text' name='tag' placeholder="e.g. 4.35">
+                </div>
+
+                <input type='hidden' name='category' value='Grammar'></td>
+                
+                <input class='btn btn-primary' type='submit' value='Upload Video'/>
+        </form>
+    
+        <p>Click the button below to show delete/revert buttons for each video. The button
+        will delete the video or revert to the previous version if there is one.</p> 
+        <button class='btn btn-danger' id='enable-video-delete'>Show/Hide Delete Buttons</button>
+    </div>
+
+</div>
+{% endif %}
+
 
 {% block bottomcontent %}
 {% endblock %}
@@ -92,4 +145,10 @@
 
 {% block extrajs %}
  {% load_video_javascript %}
+ <script>
+ $('#enable-video-delete').click(function() {
+     $('.video-delete-form').toggle();
+
+ });
+ </script>
 {% endblock %}
